@@ -4,8 +4,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Emscripten SDK (too large)
+# Emscripten SDK (too large, users must install themselves)
 emsdk/
+
+# WASM Generated Files (users must build themselves)
+# This ensures users follow the build process and have proper Emscripten setup
+wasm-version/filters.js
+wasm-version/filters.wasm
+
+# Keep source files
+!wasm-version/filters.c
+!wasm-version/build.sh
 
 # Environment variables
 .env
@@ -22,11 +31,6 @@ emsdk/
 # OS files
 .DS_Store
 Thumbs.db
-
-# Build outputs (keep WASM files for convenience)
-# Uncomment if you want to rebuild WASM every time
-# wasm-version/filters.js
-# wasm-version/filters.wasm
 
 # Logs
 logs/
