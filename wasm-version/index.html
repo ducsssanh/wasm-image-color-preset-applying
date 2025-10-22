@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Filter - WebAssembly Version</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Image Filter Benchmark</h1>
+            <div class="version-badge wasm-version">WebAssembly Version</div>
+        </header>
+        
+        <div class="upload-section">
+            <input type="file" id="imageInput" accept="image/*">
+            <label for="imageInput" class="upload-btn">
+                📁 Chọn Ảnh
+            </label>
+            <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                Đang tải...
+            </div>
+            <div id="wasmStatus" class="wasm-status">
+                <span id="wasmStatusText">⏳ Đang tải WASM module...</span>
+            </div>
+        </div>
+
+        <div class="preset-selector" id="presetSelector">
+            <!-- Presets will be loaded dynamically -->
+        </div>
+
+        <div class="canvas-container">
+            <div class="canvas-wrapper">
+                <h3>Ảnh Gốc</h3>
+                <canvas id="originalCanvas"></canvas>
+                <div class="canvas-info" id="originalInfo"></div>
+            </div>
+            <div class="canvas-wrapper">
+                <h3>Ảnh Đã Lọc</h3>
+                <canvas id="filteredCanvas"></canvas>
+                <div class="canvas-info" id="filteredInfo"></div>
+            </div>
+        </div>
+
+        <div class="metrics">
+            <div class="metric-card">
+                <h3>⏱️ Thời Gian Xử Lý</h3>
+                <div class="metric-value" id="processingTime">--</div>
+                <div class="metric-unit">milliseconds</div>
+            </div>
+            <div class="metric-card">
+                <h3>📐 Kích Thước Ảnh</h3>
+                <div class="metric-value" id="imageSize">--</div>
+                <div class="metric-unit">pixels</div>
+            </div>
+            <div class="metric-card">
+                <h3>🎯 Số Pixel</h3>
+                <div class="metric-value" id="pixelCount">--</div>
+                <div class="metric-unit">total pixels</div>
+            </div>
+            <div class="metric-card">
+                <h3>⚡ Throughput</h3>
+                <div class="metric-value" id="throughput">--</div>
+                <div class="metric-unit">pixels/ms</div>
+            </div>
+        </div>
+
+        <div class="stats-history">
+            <div class="stats-header">
+                <h3>📊 Lịch Sử Đo Lường</h3>
+                <div class="stats-actions">
+                    <button id="clearBtn" class="action-btn clear-btn">🗑️ Xóa</button>
+                    <button id="exportBtn" class="action-btn export-btn">📥 Export CSV</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="statsTable">
+                    <thead>
+                        <tr>
+                            <th>Thời gian</th>
+                            <th>Preset</th>
+                            <th>Kích thước</th>
+                            <th>Thời gian xử lý (ms)</th>
+                            <th>Pixels/ms</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="empty-state">
+                            <td colspan="5">Chưa có dữ liệu. Hãy chọn ảnh và áp dụng preset!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="filters.js"></script>
+    <script src="filters-wrapper.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
